@@ -1,9 +1,207 @@
 <!DOCTYPE html>
+
 <html>
     <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- JQuery -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/js/mdb.min.js"></script>
+        <!--<script type="text/javascript" src ="http://robsal.pythonanywhere.com/templates/mdb.js"></script>-->
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- Bootstrap core CSS -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Material Design Bootstrap -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/css/mdb.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/static/css/main_page.css">
+
         <title>The Layman's Congress</title>
     </head>
-    <body>
-        <h1> Welcome to the Main Hub- what do you wish to see?</h1>
+<!--Navbar-->
+
+
+
+<nav class="navbar navbar-expand-lg navbar-dark primary-color indigo darken-4">
+
+
+
+    <!-- Navbar brand -->
+    <a class="navbar-brand" href="#">The Layman's Congress</a>
+
+    <!-- Collapse button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="basicExampleNav">
+
+        <!-- Links -->
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">House of Representatives</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Senate</a>
+            </li>
+
+            <!-- Dropdown -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hot Topics</a>
+                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Gun Control</a>
+                    <a class="dropdown-item" href="#">Gay Rights</a>
+                    <a class="dropdown-item" href="#">Anything end everything concerning Trump(AKA The Depression Page)</a>
+                </div>
+            </li>
+
+        </ul>
+        <!-- Links -->
+
+        <form class="form-inline">
+            <div class="md-form mt-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            </div>
+        </form>
+    </div>
+    <!-- Collapsible content -->
+
+</nav>
+<!--/.Navbar-->
+<body>
+    <div class="container">
+
+
+
+
+
+    </div>
+           <!-- Start your project here-->
+
+<!--<canvas id="myChart" style="max-width: 500px;"></canvas>-->
+<!--Card-->
+<div class="card m-5" style="width: 30rem;">
+
+  <!--Card image-->
+  <div class="view overlay hm-white-slight">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Obama_Health_Care_Speech_to_Joint_Session_of_Congress.jpg" class="img-fluid" alt="">
+    <a href="#">
+      <div class="mask"></div>
+    </a>
+  </div>
+
+  <!--Card content-->
+  <div class="card-body">
+    <!--Title-->
+    <h4 class="card-title">House of Representatives</h4>
+    <!--Text-->
+    <canvas id="houseChart" style="max-width: 500px";></canvas>
+  </div>
+
+</div>
+<div class="card m-5" style="width: 30rem;">
+
+  <!--Card image-->
+  <div class="view overlay hm-white-slight">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Senatefloor.jpg" class="img-fluid" alt=""style="padding-bottom:8.5rem">
+    <a href="#">
+      <div class="mask"></div>
+    </a>
+  </div>
+
+  <!--Card content-->
+  <div class="card-body">
+    <!--Title-->
+    <h4 class="card-title">Senate</h4>
+    <!--Text-->
+    <canvas id="senateChart" style="max-width: 500px";></canvas>
+  </div>
+
+</div>
+<!--/.Card-->
+    <!-- /Start your project here-->
+
+
+<script>
+
+//doughnut
+var ctxS = document.getElementById("senateChart").getContext('2d');
+var senateChart = new Chart(ctxS, {
+    type: 'doughnut',
+    data: {
+        labels: ["Republican", "Democrat", "Independent"],
+        datasets: [
+            {
+                data: [{{senateRCount}},{{senateDCount}},{{senateICount}}],
+                backgroundColor: ["#d50000", "#2962ff", "#ffd600"],
+                hoverBackgroundColor: ["#e60000", "#3A73FF", "#FFe700"]
+            }
+        ]
+    },
+    options: {
+        responsive: true
+    }
+});
+
+</script>
+<script>
+var ctxH = document.getElementById("houseChart").getContext('2d');
+var houseChart = new Chart(ctxH, {
+    type: 'doughnut',
+    data: {
+        labels: ["Republican", "Democrat", "Independent"],
+        datasets: [
+            {
+                data: [{{HORRCount}},{{HORDCount}},{{HORICount}}],
+                backgroundColor: ["#d50000", "#2962ff", "#ffd600"],
+                hoverBackgroundColor: ["#e60000", "#3A73FF", "#FFe700"]
+            }
+        ]
+    },
+    options: {
+        responsive: true
+    }
+});
+
+</script>
+<!--Footer-->
+<footer class="page-footer font-small blue pt-4 mt-4">
+
+    <!--Footer Links-->
+    <div class="container-fluid text-center text-md-left">
+        <div class="row">
+
+            <!--First column-->
+            <div class="col-md-6">
+                <h5 class="text-uppercase">Footer Content</h5>
+                <p>A website to inform the general public about the magic of the bureaucracy(Read:Hell), the end of Democracy as we know, AKA Trump, and most other issues that end in violence and or pain.</p>
+            </div>
+            <!--/.First column-->
+        </div>
+    </div>
+    <!--/.Footer Links-->
+
+    <!--Copyright-->
+    <div class="footer-copyright py-3 text-center">
+        © 2018 Copyright:
+        <a href="https://mdbootstrap.com/material-design-for-bootstrap/"> MDBootstrap.com </a>
+    </div>
+    <!--/.Copyright-->
+
+</footer>
+<!--/.Footer-->
     </body>
 </html>
